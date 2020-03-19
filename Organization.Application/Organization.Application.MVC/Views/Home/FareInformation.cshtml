@@ -1,0 +1,34 @@
+﻿@model  IList<Organization.Application.DTO.Dtos.FareInformation>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Country</th>
+                <th>State</th>
+                <th>City</th>
+                <th>BaseFare</th>
+                <th>PerMile</th>
+                <th>PerMinute</th>
+                <th>Transport Type</th>
+                <th>Transport Option</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var info in Model)
+            {
+                <tr>
+                    <td>@info.Country</td>
+                    <td>@info.State</td>
+                    <td>@info.City</td>
+                    <td>@info.BaseFare</td>
+                    <td>@info.PerMile</td>
+                    <td>@info.PerMinute</td>
+                    <td>@info.TransportType</td>
+                    <td>@info.TransportOption</td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>

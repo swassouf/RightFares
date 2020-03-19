@@ -1,0 +1,28 @@
+﻿@model Organization.Application.Broker.Models.RoleViewModel
+
+<div class="row" >
+    <div class="col-md-10 col-sm-12 col-xs-12 padding-div">
+
+        <dl class="dl-horizontal">
+            <dt>Existing Roles:</dt>
+            @foreach (var role in Model.UserRoles)
+            {
+                <dd>@role.Name</dd>
+            }
+            @foreach (var r in Model.Roles)
+            {
+                if (!User.IsInRole(r.ID.ToString()))
+                {
+                    using (Html.BeginForm(Mvc.Manage.Actions.Roles(r.ID)))
+                    {
+                        <dd><button type="submit" class="btn btn-success">Add @r.Name Role</button></dd>
+                    }
+                }
+            }
+        </dl>
+
+
+
+
+    </div>
+</div>

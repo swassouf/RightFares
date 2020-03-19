@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "allowJs": true,
+    "noImplicitAny": false,
+    "noEmitOnError": true,
+    "removeComments": false,
+    "sourceMap": true,
+    "types": [ "jquery" ],
+    "target": "es5",
+    "lib": [ "es2015", "dom", "es5", "dom.iterable" ],
+    "jsx": "react",
+    "outDir": "jsBuild"
+
+  },
+  "compileOnSave": false,
+  "exclude": [
+    "node_modules",
+    "wwwroot",
+    "Scripts",
+    "jsBuild",
+    "bin",
+    "obj"
+
+  ]
+}

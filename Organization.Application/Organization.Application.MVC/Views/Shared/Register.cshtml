@@ -1,0 +1,82 @@
+﻿@model Organization.Application.Broker.Models.RegisterViewModel
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { role = "form", autocomplete = "off" }))
+{
+    <h6>Create a new account.</h6>
+    @Html.AntiForgeryToken()
+
+    if (Convert.ToBoolean(TempData["RegistrationError"] ?? false) == true)
+    {
+        <p class="text-danger xsmall">There was an issue contact customer service.</p>
+    }
+
+    @*@Html.ValidationSummary("All fields are required.", new { @class = "text-danger small" })*@
+    <span class="text-danger">Field marked * is required.</span>
+    <div class="row">
+        <div class="form-group col-xs-12">
+            @Html.DropDownListFor(m => m.RoleID, Model.RoleOptions, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-xs-12">
+            @Html.DropDownListFor(m => m.CountryCode, Enumerable.Empty<SelectListItem>(), new { @class = "bfh-countries form-control", data_country = "US" })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-xs-12">
+            <i class="required-field"></i>   @Html.TextBoxFor(m => m.MobilePhoneNumber, new { @class = "form-control bfh-phone", data_country = "CountryCode", title = "Mobile Number" })
+            @Html.ValidationMessage("MobilePhoneNumber", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-xs-12">
+
+            <i class="required-field"></i>  @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", placeholder = "First Name" })
+            @Html.ValidationMessage("FirstName", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-xs-12">
+            <i class="required-field"></i>   @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", placeholder = "Last Name" })
+            @Html.ValidationMessage("LastName", new { @class = "text-danger" })
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="form-group col-xs-12">
+
+            <i class="required-field"></i>  @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email" })
+            @Html.ValidationMessage("Email", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-xs-12">
+            <i class="required-field"></i>   @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
+            @Html.ValidationMessage("Password", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-xs-12">
+            <i class="required-field"></i>   @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password" })
+            @Html.ValidationMessage("ConfirmPassword", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-xs-12">
+            <input type="submit" class="btn btn-default" value="Register" />
+
+        </div>
+
+    </div>
+}
+
+
+
+

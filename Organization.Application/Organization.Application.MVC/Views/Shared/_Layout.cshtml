@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/CssFiles")
+    @Scripts.Render("~/bundles/modernizr")
+   
+</head>
+<body>
+    <header>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="navbar navbar-inverse navbar-fixed-top">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                        </div>
+                        <div class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav">
+                                <li>@Html.ActionLink("Home", Mvc.Home.Index())</li>
+                                <li>@Html.ActionLink("About", Mvc.Home.About())</li>
+                                <li>@Html.ActionLink("Contact", Mvc.Home.Contact())</li>
+                            </ul>
+                            @Html.Partial("_LoginPartial")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </header>
+    <div class="row">
+
+        @if (User.Identity.IsAuthenticated)
+        {
+            if (User.IsInRole(Organization.Application.DTO.Constants.Roles.Customer.ToString()))
+            {
+                @Html.Partial(Mvc.Shared.Views.CustomerMenu)
+            }
+            else if (User.IsInRole(Organization.Application.DTO.Constants.Roles.Deriver.ToString()))
+            {
+                @Html.Partial(Mvc.Shared.Views.DriverMenu)
+            }
+        }
+
+
+        <div class="@(User.Identity.IsAuthenticated?"col-md-10":"col-md-12") col-sm-10 col-xs-12">
+            <div class="container body-content">
+                @RenderBody()
+                <hr />
+            </div>
+
+        </div>
+    </div>
+    <footer>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <p>&copy; @DateTime.Now.Year - Right Fares</p>
+            </div>
+        </div>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/select2.js")
+    @Scripts.Render("~/Scripts/react/react.js")
+    @Scripts.Render("~/Scripts/react/react-dom.js")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

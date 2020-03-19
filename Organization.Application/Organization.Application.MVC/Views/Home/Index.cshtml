@@ -1,0 +1,55 @@
+﻿@model Organization.Application.Broker.Models.HomeViewModel
+@{
+    ViewBag.Title = "Register";
+}
+@Html.HiddenFor(m => m.CountryId)
+@Html.HiddenFor(m => m.StateId)
+@Html.HiddenFor(m => m.CityId)
+
+<h2>@ViewBag.Title.</h2>
+<div class="row">
+    <div class="col-md-8 col-sm-12 col-xs-12">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                @{
+                    IList<String> errors = (IList<String>)TempData["Errors"] ?? new List<String>();
+                }
+                @if (errors.Count > 0)
+                {
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach (var error in errors)
+                            {
+                                <li>@Html.Raw(@error)</li>
+                            }
+                        </ul>
+
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div id="countryContainer"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                @Html.Action(Mvc.Home.Actions.FareInformation(Model.CountryId, Model.StateId, Model.CityId))
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-4 col-sm-12 col-xs-12">
+        @if (!User.Identity.IsAuthenticated)
+        {
+            @Html.Action(Mvc.Account.Actions.Register())
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/InHouse/Register.js")
+    @Scripts.Render("~/jsBuild/bundle.js")
+}
